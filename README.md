@@ -1,7 +1,7 @@
 # NestedScrollCoordinatorLayout
 
 ```groovy
-compile 'com.otaliastudios:nestedscrollcoordinatorlayout:1.0.2'
+compile 'com.otaliastudios:nestedscrollcoordinatorlayout:1.0.3'
 ```
 
 A `CoordinatorLayout` that implements nested scrolling and propagates scroll events to parent views.
