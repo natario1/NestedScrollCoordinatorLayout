@@ -2,6 +2,7 @@ package com.otaliastudios.nestedscrollcoordinatorlayout;
 
 import android.content.Context;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.Size;
 import android.support.design.widget.CoordinatorLayout;
@@ -72,7 +73,7 @@ public class NestedScrollCoordinatorLayout extends CoordinatorLayout implements 
         // before any other view.
         ViewCompat.setElevation(dummyView, ViewCompat.getElevation(this));
         // Make sure it does not fit windows, or it will consume insets before the AppBarLayout.
-        ViewCompat.setFitsSystemWindows(dummyView, false);
+        dummyView.setFitsSystemWindows(false);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         params.setBehavior(dummyBehavior);
         addView(dummyView, params);
@@ -157,21 +158,22 @@ public class NestedScrollCoordinatorLayout extends CoordinatorLayout implements 
         }
 
         @Override
-        public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, DummyView child, View directTargetChild, View target, int nestedScrollAxes) {
+        public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull DummyView child, @NonNull View directTargetChild, @NonNull View target, int axes, int type) {
             NestedScrollCoordinatorLayout sheet = (NestedScrollCoordinatorLayout) coordinatorLayout;
-            return sheet.startNestedScroll(nestedScrollAxes);
             // If we want to catch, catch.
+            return sheet.startNestedScroll(axes);
         }
 
+
         @Override
-        public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, DummyView child, View target) {
+        public void onStopNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull DummyView child, @NonNull View target, int type) {
             NestedScrollCoordinatorLayout sheet = (NestedScrollCoordinatorLayout) coordinatorLayout;
             sheet.stopNestedScroll();
         }
 
         @Override
-        public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, DummyView child, View target, int dx, int dy, int[] consumed) {
             // When moving the finger up, dy is > 0.
+        public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull DummyView child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
             NestedScrollCoordinatorLayout sheet = (NestedScrollCoordinatorLayout) coordinatorLayout;
             if (mode == PASS_MODE_PARENT_FIRST) {
                 sheet.dispatchNestedPreScroll(dx, dy, consumed, null);
@@ -183,8 +185,9 @@ public class NestedScrollCoordinatorLayout extends CoordinatorLayout implements 
             }
         }
 
+
         @Override
-        public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, DummyView child, View target, float velocityX, float velocityY) {
+        public boolean onNestedPreFling(@NonNull CoordinatorLayout coordinatorLayout, @NonNull DummyView child, @NonNull View target, float velocityX, float velocityY) {
             NestedScrollCoordinatorLayout sheet = (NestedScrollCoordinatorLayout) coordinatorLayout;
             boolean s = sheet.dispatchNestedPreFling(velocityX, velocityY);
             if (mode == PASS_MODE_PARENT_FIRST) {
