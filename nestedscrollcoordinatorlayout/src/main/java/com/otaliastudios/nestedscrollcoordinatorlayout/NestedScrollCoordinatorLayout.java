@@ -185,8 +185,9 @@ public class NestedScrollCoordinatorLayout extends CoordinatorLayout implements 
             }
         }
 
+
         @Override
-        public boolean onNestedFling(@NonNull CoordinatorLayout coordinatorLayout, @NonNull DummyView child, @NonNull View target, float velocityX, float velocityY, boolean consumed) {
+        public boolean onNestedPreFling(@NonNull CoordinatorLayout coordinatorLayout, @NonNull DummyView child, @NonNull View target, float velocityX, float velocityY) {
             NestedScrollCoordinatorLayout sheet = (NestedScrollCoordinatorLayout) coordinatorLayout;
             boolean s = sheet.dispatchNestedPreFling(velocityX, velocityY);
             if (mode == PASS_MODE_PARENT_FIRST) {
