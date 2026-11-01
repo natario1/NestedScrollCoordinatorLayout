@@ -17,7 +17,7 @@ Just use `NestedScrollCoordinatorLayout` as the inner `CoordinatorLayout`.
 
 ```xml
 <!-- parent coordinator -->
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
@@ -28,7 +28,7 @@ Just use `NestedScrollCoordinatorLayout` as the inner `CoordinatorLayout`.
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>   
     
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 ```
 
 You can have slight control over the scroll propagation behavior using

@@ -1,17 +1,18 @@
 package com.otaliastudios.nestedscrollcoordinatorlayout;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.Size;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.NestedScrollingChild;
-import android.support.v4.view.NestedScrollingChildHelper;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.Size;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.NestedScrollingChild;
+import androidx.core.view.NestedScrollingChildHelper;
+import androidx.core.view.ViewCompat;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -49,7 +50,7 @@ public class NestedScrollCoordinatorLayout extends CoordinatorLayout implements 
     public @interface PassMode {}
 
     private NestedScrollingChildHelper helper;
-    private DummyBehavior dummyBehavior;
+    private DummyBehavior<View> dummyBehavior;
 
     public NestedScrollCoordinatorLayout(Context context) {
         super(context); i();
@@ -68,7 +69,7 @@ public class NestedScrollCoordinatorLayout extends CoordinatorLayout implements 
         setNestedScrollingEnabled(true);
         // Add a dummy view that will receive inner touch events.
         View dummyView = new View(getContext());
-        dummyBehavior = new DummyBehavior();
+        dummyBehavior = new DummyBehavior<>();
         // I *think* this is needed for dummyView to be identified as "topmost" and receive events
         // before any other view.
         ViewCompat.setElevation(dummyView, ViewCompat.getElevation(this));
